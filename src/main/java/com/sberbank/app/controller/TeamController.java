@@ -21,7 +21,7 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping("/teams")
+    @GetMapping("/all")
     private List<Team> findAll() {
         return teamService.getTeams();
     }
