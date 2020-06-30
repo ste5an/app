@@ -9,7 +9,6 @@ public class NewEmployeeInfoDto {
     private String position;
     private Integer age;
 
-
     public String getTeamName() {
         return teamName;
     }
@@ -59,3 +58,4 @@ public class NewEmployeeInfoDto {
     }
 
 }
+

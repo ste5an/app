@@ -2,7 +2,6 @@ package com.sberbank.app.dao.repository;
 
 import com.sberbank.app.dao.model.Employee;
 import com.sberbank.app.dao.model.Team;
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,10 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-@AutoConfigureEmbeddedDatabase
 class EmployeeRepositoryTest {
 
     @Autowired
@@ -30,6 +28,7 @@ class EmployeeRepositoryTest {
         team.setTag("Agile");
         team.setType("new");
         Team savedTeam = teamRepository.save(team);
+
         assertNotNull(savedTeam.getId());
 
         Employee employee = new Employee();
@@ -38,7 +37,8 @@ class EmployeeRepositoryTest {
         employee.setGivenName("321");
         employee.setLastName("23rfewf");
         employee.setPosition("Java");
-        employee.setId(savedTeam.getId());
+        employee.setTeam(savedTeam);
+
         Employee savedEmployee = employeeRepository.save(employee);
 
         assertNotNull(savedEmployee.getId());

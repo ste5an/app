@@ -1,7 +1,6 @@
 package com.sberbank.app.service;
 
 import com.google.common.collect.Lists;
-import com.sberbank.app.dao.model.Employee;
 import com.sberbank.app.dao.model.Team;
 import com.sberbank.app.dao.repository.TeamRepository;
 import org.slf4j.Logger;

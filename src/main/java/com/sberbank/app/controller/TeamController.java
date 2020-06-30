@@ -1,11 +1,17 @@
 package com.sberbank.app.controller;
 
-import com.sberbank.app.dao.model.Employee;
 import com.sberbank.app.dao.model.Team;
 import com.sberbank.app.service.TeamService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,37 +25,31 @@ public class TeamController {
 
     @ApiOperation(value = "get all teams from DB")
     @GetMapping("/teams")
-    private List<Team> findAll() {
+    public List<Team> findAll() {
         return teamService.findAll();
     }
 
     @GetMapping("/find/{id}")
-    private Optional<Team> getTeam(@PathVariable("id") long id) {
+    public Optional<Team> getTeam(@PathVariable("id") long id) {
         return teamService.findById(id);
     }
 
     @ApiOperation(value = "save team")
     @PostMapping("/save")
-    public void createTeam(@RequestBody Team team){
+    public void createTeam(@RequestBody Team team) {
         teamService.save(team);
     }
 
     @ApiOperation(value = "update team by id")
     @PutMapping("/update")
-    private Team update(@RequestBody Team team) {
-        teamService.update(team);
-        return team;
+    public Team update(@RequestBody Team team) {
+        return teamService.update(team);
     }
 
     @ApiOperation(value = "delete team by id")
     @DeleteMapping("/delete/{id}")
-    private void deleteTeam(@PathVariable("id") long id) {
+    public void deleteTeam(@PathVariable("id") long id) {
         teamService.deleteById(id);
     }
-
-
-
-
-
 
 }

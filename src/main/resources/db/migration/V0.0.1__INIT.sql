@@ -3,8 +3,8 @@ CREATE TABLE TEAM
     id         BIGSERIAL PRIMARY KEY NOT NULL,
     name       VARCHAR(100) NOT NULL,
     squad_type VARCHAR(100) NOT NULL,
-    tag        VARCHAR(100) NOT NULL
-
+    tag        VARCHAR(100) NOT NULL,
+    CONSTRAINT name_unique UNIQUE (name)
 );
 
 CREATE TABLE EMPLOYEE
