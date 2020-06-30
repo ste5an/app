@@ -63,5 +63,13 @@ public class Team {
         this.employees = employees;
     }
 
-
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

@@ -3,6 +3,7 @@ package com.sberbank.app.controller;
 import com.sberbank.app.dao.model.Employee;
 import com.sberbank.app.dao.model.Team;
 import com.sberbank.app.service.TeamService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-
+    @ApiOperation(value = "get all teams from DB")
     @GetMapping("/teams")
     private List<Team> findAll() {
         return teamService.findAll();
@@ -27,18 +28,20 @@ public class TeamController {
         return teamService.findById(id);
     }
 
+    @ApiOperation(value = "save team")
     @PostMapping("/save")
     public void createTeam(@RequestBody Team team){
         teamService.save(team);
     }
 
+    @ApiOperation(value = "update team by id")
     @PutMapping("/update")
     private Team update(@RequestBody Team team) {
         teamService.update(team);
         return team;
     }
 
-
+    @ApiOperation(value = "delete team by id")
     @DeleteMapping("/delete/{id}")
     private void deleteTeam(@PathVariable("id") long id) {
         teamService.deleteById(id);

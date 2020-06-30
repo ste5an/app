@@ -29,7 +29,7 @@ public class EmployeeService {
 
     public List<Employee> findAll() {
         List<Employee> employees = Lists.newArrayList(employeeRepository.findAll());
-        logger.info("Get users from DB: {}", employees);
+        logger.info("Get Employees from DB: {}", employees);
         return employeeRepository.findAll();
     }
 
@@ -74,12 +74,12 @@ public class EmployeeService {
     @Transactional
     public void deleteById(Long id) {
         employeeRepository.deleteById(id);
-        logger.info("Delete user by id from DB: {}", id);
+        logger.info("Delete Employee by id from DB: {}", id);
     }
 
     public Employee findById(long id) {
         Optional<Employee> employeeOptional = employeeRepository.findById(id);
-        logger.info("Get user by id from DB: {}", employeeOptional);
+        logger.info("Get Employee by id from DB: {}", employeeOptional);
         if (employeeOptional.isPresent()) {
             return employeeOptional.get();
         } else throw new RuntimeException("User not found");

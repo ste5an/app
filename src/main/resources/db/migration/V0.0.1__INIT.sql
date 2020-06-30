@@ -4,6 +4,7 @@ CREATE TABLE TEAM
     name       VARCHAR(100) NOT NULL,
     squad_type VARCHAR(100) NOT NULL,
     tag        VARCHAR(100) NOT NULL
+
 );
 
 CREATE TABLE EMPLOYEE
