@@ -1,4 +1,4 @@
-Создать БД sbertestDB
+CREATE DATABASE sbertestDB
 
 CREATE TABLE TEAM
 (
