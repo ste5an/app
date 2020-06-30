@@ -1,5 +1,6 @@
 package com.sberbank.app.service;
 
+import com.sberbank.app.dao.model.Employee;
 import com.sberbank.app.dao.model.Team;
 import com.sberbank.app.dao.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,20 @@ public class TeamService {
 
     public void deleteById(long id) {
         teamRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Team update(Team team) {
+        Optional<Team> optional = teamRepository.findById(team.getId());
+        if (optional.isPresent()) {
+            Team teamFromDb = optional.get();
+            teamFromDb.setId(team.getId());
+            teamFromDb.setName(team.getName());
+            teamFromDb.setTag(team.getTag());
+            teamFromDb.setType(team.getType());
+            return teamRepository.save(teamFromDb);
+        } else {
+            throw new RuntimeException("Team with id: " + team.getId() + " not found");
+        }
     }
 }

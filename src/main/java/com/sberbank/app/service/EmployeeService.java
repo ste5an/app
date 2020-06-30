@@ -35,24 +35,34 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void save(NewEmployeeInfoDto info) {
+    public Employee save(NewEmployeeInfoDto info) {
         Team team = teamRepository.findTeamByName(info.getTeamName());
 
         Employee employee = new Employee();
-        employee.setAge(info.getAge());
         //todo
         employee.setTeam(team);
-        employee.
+        employee.setFirstName(info.getFirstName());
+        employee.setLastName(info.getLastName());
+        employee.setGivenName(info.getGivenName());
+        employee.setPosition(info.getPosition());
+        employee.setAge(info.getAge());
 
-
-        employeeRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 
     @Transactional
-    public void update(Employee employee) {
+    public Employee update(Employee employee) {
         Optional<Employee> optional = employeeRepository.findById(employee.getId());
         if (optional.isPresent()) {
-            employeeRepository.save(optional.get());
+            Employee employeeFromDb = optional.get();
+            employeeFromDb.setId(employee.getId());
+            employeeFromDb.setPosition(employee.getPosition());
+            employeeFromDb.setFirstName(employee.getLastName());
+            employeeFromDb.setLastName(employee.getLastName());
+            employeeFromDb.setGivenName(employee.getGivenName());
+            employeeFromDb.setPosition(employee.getPosition());
+            employeeFromDb.setAge(employee.getAge());
+            return employeeRepository.save(employeeFromDb);
         } else {
             throw new RuntimeException("Employee with id: " + employee.getId() + " not found");
         }
@@ -63,5 +73,11 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-
+    public Employee findById(long id) {
+        Optional<Employee> employeeOptional = employeeRepository.findById(id);
+        //logger.info("Get user by passportId from DB: {}", userOptional);
+        if (employeeOptional.isPresent()) {
+            return employeeOptional.get();
+        } else throw new RuntimeException("User not found");
+    }
 }
