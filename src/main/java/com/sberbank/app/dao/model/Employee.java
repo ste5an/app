@@ -1,15 +1,21 @@
-package com.sberbank.app.model;
+package com.sberbank.app.dao.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sberbank.app.controller.dto.NewEmployeeInfoDto;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "EMPLOYEE")
 public class Employee {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -21,28 +27,20 @@ public class Employee {
     private String position;
     @Column(name = "age")
     private int age;
-    @Column(name = "team_id")
-    private int teamId;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     public Employee() {
     }
 
-    public Employee(int id, String firstName, String lastName,
-                    String givenName, String position, int age, int teamId) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.givenName = givenName;
-        this.position = position;
-        this.age = age;
-        this.teamId = teamId;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,12 +84,12 @@ public class Employee {
         this.age = age;
     }
 
-    public int getTeamId() {
-        return teamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override
@@ -103,7 +101,7 @@ public class Employee {
                 ", givenName='" + givenName + '\'' +
                 ", position='" + position + '\'' +
                 ", age=" + age +
-                ", teamId=" + teamId +
+                ", team=" + team +
                 '}';
     }
 }

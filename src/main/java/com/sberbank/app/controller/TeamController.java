@@ -1,12 +1,12 @@
 package com.sberbank.app.controller;
 
-import com.sberbank.app.model.Team;
+import com.sberbank.app.controller.dto.NewEmployeeInfoDto;
+import com.sberbank.app.dao.model.Employee;
+import com.sberbank.app.dao.model.Team;
 import com.sberbank.app.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,23 +14,23 @@ import java.util.List;
 @RequestMapping("/rest/team")
 public class TeamController {
 
-    TeamService teamService;
-
     @Autowired
-    public void setTeamService(TeamService teamService) {
-        this.teamService = teamService;
-    }
+    private TeamService teamService;
 
-    @GetMapping("/all")
+
+    @GetMapping("/teams")
     private List<Team> findAll() {
-        return teamService.getTeams();
+        return teamService.findAll();
     }
 
-    @PostMapping("/save/team")
-    private Team saveTeam(Team team) {
-        teamService.saveTeam(team);
-        return team;
+    @PostMapping("/save")
+    public void createTeam(@RequestBody Team team){
+        teamService.save(team);
     }
+
+
+
+
 
 
 }

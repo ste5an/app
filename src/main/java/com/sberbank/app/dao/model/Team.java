@@ -1,16 +1,18 @@
-package com.sberbank.app.model;
+package com.sberbank.app.dao.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "team")
+@Table(name = "TEAM")
 public class Team {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "squad_type")
@@ -18,26 +20,14 @@ public class Team {
     @Column(name = "tag")
     private String tag;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "team", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
-
-    public Team() {
-    }
-
-    public Team(int id, String name, String type, String tag) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.tag = tag;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

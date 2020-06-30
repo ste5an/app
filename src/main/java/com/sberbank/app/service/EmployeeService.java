@@ -1,7 +1,10 @@
 package com.sberbank.app.service;
 
-import com.sberbank.app.model.Employee;
-import com.sberbank.app.repository.EmployeeRepository;
+import com.sberbank.app.controller.dto.NewEmployeeInfoDto;
+import com.sberbank.app.dao.model.Employee;
+import com.sberbank.app.dao.model.Team;
+import com.sberbank.app.dao.repository.EmployeeRepository;
+import com.sberbank.app.dao.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,29 +13,55 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class EmployeeService {
 
-    EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Autowired
-    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    private TeamRepository teamRepository;
 
-    public List<Employee> listAll() {
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
-    public void saveEmployee(Employee employee) {
+    public Employee findById(Long id) {
+        Optional<Employee> optional = employeeRepository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            throw new RuntimeException("Employee with id: " + id + " not found");
+        }
+    }
+
+    @Transactional
+    public void save(NewEmployeeInfoDto info) {
+        Team team = teamRepository.findTeamByName(info.getTeamName());
+
+        Employee employee = new Employee();
+        employee.setAge(info.getAge());
+        //todo
+        employee.setTeam(team);
+        employee.
+
+
         employeeRepository.save(employee);
     }
 
-    public Optional<Employee> findEmployeeById(long id) {
-        return employeeRepository.findById(id);
+    @Transactional
+    public void update(Employee employee) {
+        Optional<Employee> optional = employeeRepository.findById(employee.getId());
+        if (optional.isPresent()) {
+            employeeRepository.save(optional.get());
+        } else {
+            throw new RuntimeException("Employee with id: " + employee.getId() + " not found");
+        }
     }
 
-    public void deleteEmployeeById(long id) {
+    @Transactional
+    public void deleteById(Long id) {
         employeeRepository.deleteById(id);
     }
+
+
 }
