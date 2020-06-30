@@ -58,15 +58,4 @@ public class NewEmployeeInfoDto {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "NewEmployeeInfoDto{" +
-                "teamName='" + teamName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", givenName='" + givenName + '\'' +
-                ", position='" + position + '\'' +
-                ", age=" + age +
-                '}';
-    }
 }
