@@ -9,6 +9,9 @@ https://hub.docker.com/r/ste5an/docker-sber-app
 docker pull ste5an/docker-sber-app:sberapp
 
 docker run -p 8080:8080 ste5an/docker-sber-app:sberapp
+
+Использовать POSTMAN для тестировния запросов. Смотреть ниже пункт 1 ---->>
+
 --------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
 Инструкция по запуску и тестированию приложения используя postgres:
@@ -90,28 +93,3 @@ GET ALL EMPLOYEES: 		http://localhost:8080/rest/employee/employees
 DELETE EMPLOYEE BY ID: 		http://localhost:8080/rest/employee/delete/?
 GET EMPLOYEE BY ID:		http://localhost:8080/rest/employee/find/?
 UPDATE(PUT) EMPLOYEE BY ID: 	http://localhost:8080/rest/employee/update
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
