@@ -2,7 +2,7 @@
 
 Ссылка на Докер репозиторий:
 
-https://hub.docker.com/repository/docker/ste5an/docker-sber-app
+https://hub.docker.com/r/ste5an/docker-sber-app
 
 Запустить используя commandline:
 
