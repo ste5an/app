@@ -18,7 +18,6 @@ docker run -p 8080:8080 ste5an/docker-sber-app:sberapp
 
 https://hub.docker.com/r/ste5an/docker-sber-app
 
-
 --------------------------------------------------------------------------------------------
 SQL DDL scripts:
 
